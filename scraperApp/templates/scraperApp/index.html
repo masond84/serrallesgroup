@@ -1,0 +1,131 @@
+{% extends "scraperApp/base.html" %}
+
+{% block title %}Web Scraping Application{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container has-text-centered" style="margin-top:-5.9rem;">
+        <h2 class="title">How It Works</h2>
+        <div class="content">
+            <p>Our web scraping tool allows you to gather relevant information from real estate websites.</p>
+            <p>Follow these steps to get started:</p>
+            <ol style="list-style-type: none; padding-left: 0;"> <!-- Remove default list-style-type and padding -->
+                <li style="margin-left: 0; padding-left: 0;">Select a county in Florida.</li> <!-- Remove margin and padding for list item -->
+                <li style="margin-left: 0; padding-left: 0;">Choose a date for the auction you want to track.</li>
+                <li style="margin-left: 0; padding-left: 0;">Click the "Scrape Data" button to initiate the scraping process.</li>
+                <li style="margin-left: 0; padding-left: 0;">View and download the extracted data.</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container">
+        <div class="card has-background-white-bis p-4" style="max-width: 400px; margin: 0 auto; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
+            <h2 class="title">Start Scraping</h2>
+            <form action="{% url 'scrape_view' %}" method="post">
+                {% csrf_token %}
+
+                <div class="field">
+                    <label class="label">Select County</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="county">
+                                <option value="hillsborough">Hillsborough County</option>
+                                <option value="alachua">Alachua County</option>
+                                <option value="58">Alachua Foreclosure</option>
+                                <option value="78">Alachua Taxdeed</option>
+                                <option value="105">Baker Taxdeed</option>
+                                <option value="13">Bay Foreclosure</option>
+                                <option value="73">Bay Taxdeed</option>
+                                <option value="29">Brevard Taxdeed</option>
+                                <option value="17">Broward Foreclosure</option>
+                                <option value="107">Calhoun</option>
+                                <option value="3">Charlotte</option>
+                                <option value="35">Citrus Foreclosure</option>
+                                <option value="30">Citrus Taxdeed</option>
+                                <option value="67">Clay Foreclosure</option>
+                                <option value="68">Clay Taxdeed</option>
+                                <option value="2">Duval Foreclosure</option>
+                                <option value="32">Duval Tax Deed</option>
+                                <option value="19">Escambia Foreclosure</option>
+                                <option value="18">Escambia Taxdeed</option>
+                                <option value="53">Flagler Foreclosure</option>
+                                <option value="51">Flagler Taxdeed</option>
+                                <option value="81">Gilchrist Foreclosure</option>
+                                <option value="55">Gilchrist Taxdeed</option>
+                                <option value="95">Gulf Foreclosure</option>
+                                <option value="96">Gulf Taxdeed</option>
+                                <option value="41">Hendry TaxDeed</option>
+                                <option value="56">Hernando Taxdeed</option>
+                                <option value="64">Hillsborough Taxdeed</option>
+                                <option value="25">Indian River Foreclosure</option>
+                                <option value="54">Indian River Taxdeed</option>
+                                <option value="101">Jackson Foreclosure</option>
+                                <option value="102">Jackson Taxdeed</option>
+                                <option value="37">Lake Taxdeed</option>
+                                <option value="8">Lee Foreclosure</option>
+                                <option value="7">Lee Taxdeed</option>
+                                <option value="44">Leon Foreclosure</option>
+                                <option value="49">Leon Taxdeed</option>
+                                <option value="1">Manatee</option>
+                                <option value="42">Marion Foreclosure</option>
+                                <option value="79">Marion Taxdeed</option>
+                                <option value="26">Martin Foreclosure</option>
+                                <option value="71">Martin Taxdeed</option>
+                                <option value="15">Miami-Dade</option>
+                                <option value="27">Nassau Foreclosure</option>
+                                <option value="92">Nassau Taxdeed</option>
+                                <option value="16">Okaloosa Foreclosure</option>
+                                <option value="65">Okaloosa Taxdeed</option>
+                                <option value="90">Okeechobee</option>
+                                <option value="21">Orange Foreclosure</option>
+                                <option value="22">Orange Taxdeed</option>
+                                <option value="31">Osceola Taxdeed</option>
+                                <option value="34">Palm Beach Foreclosure</option>
+                                <option value="99">Palm Beach Taxdeed</option>
+                                <option value="14">Pasco Foreclosure</option>
+                                <option value="50">Pasco Taxdeed</option>
+                                <option value="23">Pinellas Foreclosure</option>
+                                <option value="24">Pinellas Taxdeed</option>
+                                <option value="20">Polk Foreclosure</option>
+                                <option value="28">Polk Taxdeed</option>
+                                <option value="57">Putnam Foreclosure</option>
+                                <option value="74">Putnam Taxdeed</option>
+                                <option value="66">Saint Johns Foreclosure</option>
+                                <option value="45">Santa Rosa Foreclosure</option>
+                                <option value="52">Santa Rosa Taxdeed</option>
+                                <option value="11">Sarasota Foreclosure</option>
+                                <option value="70">Sarasota Taxdeed</option>
+                                <option value="103">Seminole Foreclosure</option>
+                                <option value="84">St. Lucie</option>
+                                <option value="43">Volusia Foreclosure</option>
+                                <option value="10">Volusia Taxdeed</option>
+                                <option value="6">Walton</option>
+                                <option value="108">Washington Foreclosure</option>
+                                <option value="76">Washington Taxdeed</option>
+                                <!-- Add more county options here -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Auction Date</label>
+                    <div class="control">
+                        <input type="date" name="auction_date" class="input" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <button type="submit" class="button is-primary is-fullwidth">Scrape Data</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
